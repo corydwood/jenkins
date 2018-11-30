@@ -1,4 +1,4 @@
-function Invoke-JenkinsJob
+function Get-JenkinsJobBuild
 {
     [CmdLetBinding()]
     param
@@ -40,35 +40,22 @@ function Invoke-JenkinsJob
 
         [parameter(
             Position = 6,
-            Mandatory = $false)]
-        [Hashtable]
-        $Parameters
+            Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [System.String]
+        $BuildNumber
     )
 
-    $null = $PSBoundParameters.Add('Type', 'Command')
+    $null = $PSBoundParameters.Add('Type', 'RestCommand')
 
-    $Command = Resolve-JenkinsCommandUri -Folder $Folder -JobName $Name -Command 'build'
+    $Command = Resolve-JenkinsCommandUri -Folder $Folder -JobName $Name -Command "$BuildNumber/api/json"
 
-    $null = $PSBoundParameters.Remove('Name')
     $null = $PSBoundParameters.Remove('Folder')
+    $null = $PSBoundParameters.Remove('Name')
+    $null = $PSBoundParameters.Remove('BuildNumber')
     $null = $PSBoundParameters.Remove('Confirm')
-    $null = $PSBoundParameters.Remove('Parameters')
     $null = $PSBoundParameters.Add('Command', $Command)
-    $null = $PSBoundParameters.Add('Method', 'post')
-
-    if ($Parameters)
-    {
-        $postValues = @()
-
-        foreach ($key in $Parameters.Keys)
-        {
-            $postValues += @( @{ name = $key; value = $Parameters[$key] } )
-        } # foreach
-
-        $postObject = @{ parameter = $postValues }
-        $body = @{ json = (ConvertTo-JSON -InputObject $postObject) }
-        $null = $PSBoundParameters.Add('Body', $body)
-    }
+    $null = $PSBoundParameters.Add('Method', 'get')
 
     Invoke-JenkinsCommand @PSBoundParameters
 } # Invoke-JenkinsJob

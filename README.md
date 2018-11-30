@@ -56,9 +56,12 @@ folder.
 - `Get-JenkinsCrumb`: Gets a Jenkins Crumb.
 - `Get-JenkinsFolderList`: Get a list of folders in a Jenkins master server.
 - `Get-JenkinsJob`: Get a Jenkins Job Definition.
+- `Get-JenkinsJobBuild`: Gets details of a build for a Jenkins job.
+- `Get-JenkinsJobBuildOutput`: Gets output for a build for a Jenkins job.
 - `Get-JenkinsJobList`: Get a list of jobs in a Jenkins master server.
 - `Get-JenkinsObject`: Get a list of objects in a Jenkins master server.
 - `Get-JenkinsPluginsList`: Retrieves a list of installed plugins.
+- `Get-JenkinsQueueItem`: Gets details of a Jenkins item in the queue.
 - `Get-JenkinsViewList`: Get a list of views in a Jenkins master server.
 - `Initialize-JenkinsUpdateCache`: Creates or updates a local Jenkins Update cache.
 - `Invoke-JenkinsCommand`: Execute a Jenkins command or request via the Jenkins Rest API.
