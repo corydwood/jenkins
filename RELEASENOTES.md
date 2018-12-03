@@ -2,6 +2,20 @@
 
 ## What is New in Jenkins 1.0.2.240
 
+November 30, 2018
+
+- Added `Get-JenkinsJobBuild` function for getting details of a build for a
+  Jenkins job, such as the status.
+- Added `Get-JenkinsJobBuildOutput` function for getting the output for a
+  build for a Jenkins job.
+- Added `Get-JenkinsQueueItem` function for  getting the details of a Jenkins
+  item in the queue.
+- Updated `Invoke-JenkinsJob` function to use `Command` instead of `RestCommand`
+  for the `Type` parameter so `Invoke-WebRequest` is used instead of
+  `Invoke-RestMethod`. This is needed to return the `Headers` property that
+  contains the item that gets created in the queue in order to query it using the
+  `Get-JenkinsQueueItem` function.
+
 November 14, 2018
 
 - Added `Disable-JenkinsJob` and `Enable-JenkinsJob` functions for disabling
